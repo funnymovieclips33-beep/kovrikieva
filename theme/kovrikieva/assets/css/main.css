@@ -862,3 +862,33 @@ body{line-height:1.65;color:#333}
 	.kv-cmp__row>span:last-child{padding-bottom:14px}
 }
 @media (max-width:800px){.kv-cmp__row .is-eva{display:block}.kv-cmp__row .is-eva .kv-i{display:none}.kv-cmp__row>span[data-l]::before{margin-right:4px}}
+
+/* ===== v13: FAQ-дизайн, фон текста, иконки шагов, отзывы ===== */
+.kv-faq__item{border:1px solid #cfc8c6;background:#f3efee}
+.kv-faq__item summary{background:#ece6e4;border-radius:4px;transition:background .2s}
+.kv-faq__item summary:hover{background:#e3dad8}
+.kv-faq__item[open]{background:#fff;border-color:var(--c-brand)}
+.kv-faq__item[open] summary{background:var(--c-brand);color:#fff;border-radius:3px 3px 0 0}
+.kv-faq__item[open] .kv-faq__arr{border-top-color:#fff}
+.kv-faq__a{padding:16px 22px 18px}
+.kv-faq__a ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.kv-faq__a li{position:relative;padding-left:32px;line-height:1.5}
+.kv-faq__a li::before{content:"";position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:4px;background:var(--c-brand) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round' d='m6 12.5 4 4L18 8'/%3E%3C/svg%3E") center/14px no-repeat}
+.kv-faq__a p:last-child{margin-bottom:0}
+.kv-seotext{position:relative;background:#fff url(/wp-content/uploads/2021/05/bg-foot.jpg) center/cover no-repeat}
+.kv-seotext::before{content:"";position:absolute;inset:0;background:rgba(255,255,255,.86);pointer-events:none}
+.kv-seotext>*{position:relative}
+/* иконки «Как мы работаем» */
+.kv-step__ic{display:grid;place-items:center;width:76px;height:76px;margin:6px auto 14px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#8e4a4a,#5a2b2b);color:#fff;box-shadow:0 10px 22px rgba(113,57,57,.3),inset 0 0 0 5px rgba(255,255,255,.15);transition:transform .3s}
+.kv-step__ic .kv-i{width:38px;height:38px}
+.kv-step:hover .kv-step__ic{transform:scale(1.08) rotate(-4deg)}
+.kv-step__num{background:var(--c-brand)}
+/* отзывы */
+.kv-reviews__widget{min-height:120px}
+.kv-reviews__frame{display:block;width:100%;max-width:760px;height:620px;margin:0 auto;border:1px solid var(--c-line);border-radius:6px}
+.kv-reviews__btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:28px}
+.kv-rv-ic{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font:800 .8rem Arial,sans-serif;color:#fff}
+.kv-rv-ic--ya{background:#fc3f1d}
+.kv-rv-ic--g{background:conic-gradient(#ea4335 0 25%,#fbbc05 0 50%,#34a853 0 75%,#4285f4 0)}
+.kv-reviews-sec--full{padding-top:24px}
+@media (max-width:600px){.kv-reviews__btns .kv-btn{width:100%}.kv-reviews__frame{height:560px}}

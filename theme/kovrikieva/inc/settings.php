@@ -21,6 +21,8 @@ function kv_defaults() {
 		'gads'          => 'AW-720698988',
 		'ya_org'        => '213592712545',
 		'video'         => '',
+		'reviews_sc'    => '',
+		'google_review' => '',
 		'geo_lat'       => '53.8672',
 		'geo_lng'       => '27.6531',
 	];
@@ -59,6 +61,8 @@ add_action('customize_register', function ($wp) {
 		'metrika'     => 'Яндекс.Метрика: номер счётчика',
 		'gads'        => 'Google Ads / GA4 ID (AW-… или G-…)',
 		'ya_org'      => 'ID организации в Яндекс.Картах (виджет отзывов)',
+		'reviews_sc'    => 'Шорткод виджета отзывов (например [trustindex no-registration=...])',
+		'google_review' => 'Ссылка «Оставить отзыв в Google»',
 		'video'       => 'Видео 9:16 в первом экране ЭВА (ссылка Vimeo / YouTube / .mp4; пусто = видео из темы)',
 		'geo_lat'     => 'Координаты: широта',
 		'geo_lng'     => 'Координаты: долгота',
@@ -66,7 +70,7 @@ add_action('customize_register', function ($wp) {
 	foreach ($fields as $key => $label) {
 		$wp->add_setting('kv_' . $key, [
 			'default'           => kv_defaults()[$key],
-			'sanitize_callback' => 'sanitize_text_field',
+			'sanitize_callback' => $key === 'reviews_sc' ? 'wp_kses_post' : 'sanitize_text_field',
 		]);
 		$wp->add_control('kv_' . $key, [
 			'label'   => $label,

@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 if (empty($d['steps'])) {
 	return;
 }
-$icons = ['cart', 'car', 'gears', 'flag'];
+$icons = ['st-order', 'st-measure', 'st-sew', 'st-done'];
 ?>
 <section class="kv-sec kv-sota kv-steps">
 	<div class="kv-wrap">

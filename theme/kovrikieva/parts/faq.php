@@ -12,7 +12,7 @@ if (empty($d['faq']) && empty($d['text'])) {
 			<h2 class="kv-h2 kv-h2--line">Часто задаваемые вопросы</h2>
 			<div class="kv-divider" aria-hidden="true"><?php echo kv_icon('target'); ?></div>
 			<?php foreach ($d['faq'] ?? [] as $f) : ?>
-				<details class="kv-faq__item">
+				<details class="kv-faq__item" name="kv-faq">
 					<summary><?php echo esc_html($f[0]); ?><span class="kv-faq__arr" aria-hidden="true"></span></summary>
 					<div class="kv-faq__a kv-content"><?php echo wp_kses_post($f[1]); ?></div>
 				</details>

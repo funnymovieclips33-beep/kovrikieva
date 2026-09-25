@@ -291,6 +291,14 @@
 		goal('video');
 	});
 
+	/* ---------- FAQ: открыт только один вопрос (фолбэк для старых браузеров) ---------- */
+	$$('.kv-faq__item').forEach(function (dt) {
+		dt.addEventListener('toggle', function () {
+			if (!dt.open) return;
+			$$('.kv-faq__item').forEach(function (o) { if (o !== dt && o.open) o.open = false; });
+		});
+	});
+
 	/* ---------- Конструктор коврика ---------- */
 	$$('[data-kvc-root]').forEach(function (root) {
 		var svg = $('.kvc__svg', root), cta = $('[data-kvc-cta]', root);

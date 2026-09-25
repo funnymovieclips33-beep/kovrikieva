@@ -30,10 +30,15 @@ else :
 	$b      = kv_brand($slug);
 	$name   = $b[0];
 	$photos = kv_data('gallery')['eva'][$name] ?? [];
+	$vphoto = kv_data('gallery')['vors'][$name] ?? [];
+	$thumbs = array_merge(
+		array_slice($photos ?: $eva['hero_thumbs'], 0, 2),
+		array_slice($vphoto ?: $vors['hero_thumbs'], 0, 2)
+	);
 	$d      = $eva;
 	$d['h1']          = 'Коврики для ' . $name;
 	$d['lead']        = 'ЭВА и ворсовые коврики для ' . $name . ' в салон и багажник. Изготовим по лекалам вашей модели за 24 часа и подарим <b>логотип ' . esc_html($name) . '</b> при заказе комплекта!';
-	$d['hero_thumbs'] = $photos ? array_slice($photos, 0, 4) : $eva['hero_thumbs'];
+	$d['hero_thumbs'] = $thumbs;
 	$d['gallery']     = $photos ? 'eva' : '';
 	$d['gallery_only'] = $name;
 	$d['faq'] = array_merge([
@@ -47,6 +52,7 @@ else :
 	kv_part('brand-types', ['b' => $b, 'slug' => $slug]);
 	kv_part('constructor', $args);
 	kv_part('gallery', $args);
+	kv_part('reviews', []);
 	kv_part('compare', []);
 	kv_part('steps', $args);
 	kv_part('faq', $args);
