@@ -25,12 +25,23 @@
 	}
 	var burger = $('[data-kv-burger]');
 	var nav = $('#kv-nav');
+	function setMenu(open) {
+		burger.setAttribute('aria-expanded', open);
+		nav.classList.toggle('is-open', open);
+		d.documentElement.classList.toggle('kv-menu-open', open);
+	}
 	if (burger && nav) {
-		burger.addEventListener('click', function () {
-			var open = burger.getAttribute('aria-expanded') !== 'true';
-			burger.setAttribute('aria-expanded', open);
-			nav.classList.toggle('is-open', open);
-			d.documentElement.style.overflow = open ? 'hidden' : '';
+		burger.addEventListener('click', function () { setMenu(burger.getAttribute('aria-expanded') !== 'true'); });
+		var ov = $('[data-kv-overlay]');
+		if (ov) ov.addEventListener('click', function () { setMenu(false); });
+		d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('is-open')) setMenu(false); });
+		$$('.kv-subtoggle', nav).forEach(function (b) {
+			b.addEventListener('click', function () {
+				var li = b.parentNode, open = !li.classList.contains('is-sub-open');
+				$$('.is-sub-open', nav).forEach(function (o) { if (o !== li) { o.classList.remove('is-sub-open'); $('.kv-subtoggle', o).setAttribute('aria-expanded', 'false'); } });
+				li.classList.toggle('is-sub-open', open);
+				b.setAttribute('aria-expanded', open);
+			});
 		});
 	}
 

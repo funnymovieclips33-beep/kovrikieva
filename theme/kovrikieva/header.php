@@ -25,6 +25,7 @@
 						<li class="<?php echo (!empty($item[2]) ? 'has-sub' : '') . ($kv_cur ? ' is-active' : ''); ?>">
 							<a href="<?php echo esc_url($item[1]); ?>"><?php echo esc_html($item[0]); ?><?php echo !empty($item[2]) ? kv_icon('chevron', 'kv-nav__chev') : ''; ?></a>
 							<?php if (!empty($item[2])) : ?>
+								<button type="button" class="kv-subtoggle" aria-expanded="false" aria-label="Подменю «<?php echo esc_attr($item[0]); ?>»"><?php echo kv_icon('chevron'); ?></button>
 								<ul class="kv-nav__sub">
 									<?php foreach ($item[2] as $sub) : ?>
 										<li><a href="<?php echo esc_url($sub[1]); ?>"><?php echo esc_html($sub[0]); ?></a></li>
@@ -40,6 +41,7 @@
 				<p><?php echo esc_html(kv_opt('hours')); ?><br><?php echo esc_html(kv_opt('address')); ?></p>
 			</div>
 		</nav>
+		<div class="kv-nav-overlay" data-kv-overlay></div>
 
 		<div class="kv-header__contacts">
 			<div class="kv-hinfo"><span class="kv-hinfo__ic"><?php echo kv_icon('clock'); ?></span><span><?php echo str_replace(', ', '<br>', esc_html(kv_opt('hours'))); ?></span></div>
