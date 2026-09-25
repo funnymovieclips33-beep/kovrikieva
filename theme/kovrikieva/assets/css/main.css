@@ -534,3 +534,65 @@ ul,ol{margin:0 0 1em;padding-left:1.25em}
 @media (max-width:380px){.kv-adv__list,.kv-steps__list{grid-template-columns:1fr}}
 @media (max-width:980px){.kv-hero__grid{grid-template-columns:1fr;gap:26px}.kv-hero__img{width:100%;max-width:420px}.kv-thumbs{gap:6px}}
 @media (max-width:980px){.kv-hero__img{width:86%;transform:rotate(-3deg)}}
+
+/* ===== v6: мобильная версия — чистовая ===== */
+.kv-mnav{display:none}
+@media (max-width:980px){
+	/* шапка не фиксированная */
+	.kv-header{position:relative;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+	.kv-header__in{align-items:center;min-height:64px;gap:12px}
+	.kv-logo{align-self:flex-start;width:68px;height:64px}
+	.kv-logo img{width:68px;height:68px;padding:5px}
+	.kv-burger{margin-left:auto;width:46px;height:46px;border-radius:8px;background:var(--c-brand);color:#fff;box-shadow:0 4px 12px rgba(113,57,57,.3)}
+	.kv-burger .kv-i{width:26px;height:26px}
+	.kv-burger[aria-expanded=true]{background:#fff;color:var(--c-brand);box-shadow:inset 0 0 0 2px var(--c-brand)}
+	.kv-menu-open .kv-header{position:sticky;top:0}
+	.kv-nav{top:64px}
+	.kv-nav-overlay{inset:64px 0 0 0}
+	.kv-nav__mobile-contacts{display:none}
+	/* контакты в меню */
+	.kv-mnav{display:block;margin:22px 22px 0;padding:18px;border-radius:10px;background:rgba(0,0,0,.18)}
+	.kv-mnav__call{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:8px;background:#fff;color:var(--c-brand);text-decoration:none;font:700 1.15rem var(--ff)}
+	.kv-mnav__call small{display:block;font-size:.72rem;font-weight:500;color:var(--c-muted);text-transform:uppercase;letter-spacing:.04em}
+	.kv-mnav__ic{display:grid;place-items:center;width:40px;height:40px;border-radius:8px;background:var(--c-brand);color:#fff;flex:none}
+	.kv-mnav__ic .kv-i{width:20px;height:20px}
+	.kv-mnav__ic--line{background:rgba(255,255,255,.14);width:36px;height:36px}
+	.kv-mnav__info{list-style:none;padding:0;margin:16px 0}
+	.kv-mnav__info li{display:flex;align-items:center;gap:12px;margin-bottom:10px;color:rgba(255,255,255,.9);font-size:.92rem;line-height:1.35}
+	.kv-mnav__msgs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+	.kv-mnav__msg{display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px;border-radius:8px;color:#fff;text-decoration:none;font-weight:600}
+	.kv-mnav__msg .kv-i{width:20px;height:20px}
+	.kv-mnav__msg--viber{background:var(--c-viber)}
+	.kv-mnav__msg--tg{background:var(--c-tg)}
+	/* нижняя панель: звонок главный */
+	.kv-dock{grid-auto-flow:unset;grid-template-columns:1fr 60px 60px;gap:8px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);backdrop-filter:blur(8px)}
+	.kv-dock a{min-height:50px;border-radius:8px}
+	.kv-dock__call{flex-direction:row!important;gap:10px!important;background:var(--c-brand);color:#fff!important;font-size:1rem!important;font-weight:700!important;box-shadow:0 6px 16px rgba(113,57,57,.35)}
+	.kv-dock__call .kv-i{color:#fff!important;width:22px;height:22px;animation:kv-ring 2.8s ease-in-out infinite}
+	@keyframes kv-ring{0%,80%,100%{transform:none}84%{transform:rotate(-14deg)}88%{transform:rotate(14deg)}92%{transform:rotate(-8deg)}}
+	.kv-dock__msg{color:#fff!important}
+	.kv-dock__msg .kv-i{color:#fff!important;width:26px;height:26px}
+	.kv-dock__msg--viber{background:var(--c-viber)}
+	.kv-dock__msg--tg{background:var(--c-tg)}
+	body{padding-bottom:calc(66px + env(safe-area-inset-bottom))}
+	/* первый экран */
+	.kv-hero{padding:26px 0 30px}
+	.kv-hero .kv-wrap{padding-left:20px;padding-right:20px}
+	.kv-hero__cta .kv-btn{width:auto;flex:0 1 auto;max-width:100%;padding-left:28px;padding-right:28px}
+	.kv-hero__media{padding:0 12px}
+	.kv-hero__img{width:100%;max-width:440px;transform:rotate(-3deg)}
+	/* 4 фото */
+	.kv-thumbs{grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px;padding-left:20px;padding-right:20px}
+	.kv-thumbs a{border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+}
+@media (max-width:600px){
+	.kv-thumbs{grid-template-columns:1fr 1fr;gap:10px}
+	.kv-hero__cta .kv-btn{width:100%}
+}
+.kv-thumbs a{border-radius:12px}
+@media (max-width:980px){
+	.kv-dock a.kv-dock__call{background:var(--c-brand);color:#fff;flex-direction:row;font-size:1rem;font-weight:700}
+	.kv-dock a.kv-dock__msg--viber{background:var(--c-viber)}
+	.kv-dock a.kv-dock__msg--tg{background:var(--c-tg)}
+	.kv-dock a .kv-i{color:#fff}
+}

@@ -36,9 +36,16 @@
 					<?php endforeach; ?>
 				</ul>
 			<?php endif; ?>
-			<div class="kv-nav__mobile-contacts">
-				<a class="kv-btn kv-btn--block" href="<?php echo esc_attr(kv_tel()); ?>" data-goal="call"><?php echo kv_icon('phone'); ?><?php echo esc_html(kv_opt('phone_label')); ?></a>
-				<p><?php echo esc_html(kv_opt('hours')); ?><br><?php echo esc_html(kv_opt('address')); ?></p>
+			<div class="kv-mnav">
+				<a class="kv-mnav__call" href="<?php echo esc_attr(kv_tel()); ?>" data-goal="call"><span class="kv-mnav__ic"><?php echo kv_icon('phone'); ?></span><span><small>Позвонить</small><?php echo esc_html(kv_opt('phone_label')); ?></span></a>
+				<ul class="kv-mnav__info">
+					<li><span class="kv-mnav__ic kv-mnav__ic--line"><?php echo kv_icon('clock'); ?></span><span><?php echo str_replace(', ', '<br>', esc_html(kv_opt('hours'))); ?></span></li>
+					<li><span class="kv-mnav__ic kv-mnav__ic--line"><?php echo kv_icon('pin'); ?></span><span><?php echo esc_html(kv_opt('address')); ?></span></li>
+				</ul>
+				<div class="kv-mnav__msgs">
+					<a class="kv-mnav__msg kv-mnav__msg--viber" href="<?php echo esc_attr(kv_viber()); ?>" data-goal="viber"><?php echo kv_icon('viber'); ?>Viber</a>
+					<?php if (kv_tg()) : ?><a class="kv-mnav__msg kv-mnav__msg--tg" href="<?php echo esc_url(kv_tg()); ?>" target="_blank" rel="noopener" data-goal="telegram"><?php echo kv_icon('telegram'); ?>Telegram</a><?php endif; ?>
+				</div>
 			</div>
 		</nav>
 		<div class="kv-nav-overlay" data-kv-overlay></div>
@@ -48,7 +55,6 @@
 			<div class="kv-hinfo"><span class="kv-hinfo__ic kv-hinfo__ic--fill"><?php echo kv_icon('phone'); ?></span><a href="<?php echo esc_attr(kv_tel()); ?>" data-goal="call"><?php echo esc_html(kv_opt('phone_label')); ?></a></div>
 		</div>
 
-		<a class="kv-header__call" href="<?php echo esc_attr(kv_tel()); ?>" aria-label="Позвонить" data-goal="call"><?php echo kv_icon('phone'); ?></a>
 		<button class="kv-burger" type="button" aria-controls="kv-nav" aria-expanded="false" aria-label="Меню" data-kv-burger><?php echo kv_icon('menu', 'kv-burger__open'); ?><?php echo kv_icon('close', 'kv-burger__close'); ?></button>
 	</div>
 </header>

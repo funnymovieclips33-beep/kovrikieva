@@ -51,10 +51,9 @@ $dir = $ctx ? kv_direction($ctx['dir']) : null;
 
 <!-- Мобильная панель действий -->
 <nav class="kv-dock" aria-label="Быстрая связь">
-	<a href="<?php echo esc_attr(kv_tel()); ?>" data-goal="call"><?php echo kv_icon('phone'); ?><span>Позвонить</span></a>
-	<a href="<?php echo esc_attr(kv_viber()); ?>" data-goal="viber"><?php echo kv_icon('viber'); ?><span>Viber</span></a>
-	<?php if (kv_tg()) : ?><a href="<?php echo esc_url(kv_tg()); ?>" target="_blank" rel="noopener" data-goal="telegram"><?php echo kv_icon('telegram'); ?><span>Telegram</span></a><?php endif; ?>
-	<button type="button" class="kv-dock__main" data-modal="order"><?php echo kv_icon('gift'); ?><span>Заказать</span></button>
+	<a class="kv-dock__call" href="<?php echo esc_attr(kv_tel()); ?>" data-goal="call"><?php echo kv_icon('phone'); ?><span>Позвонить</span></a>
+	<a class="kv-dock__msg kv-dock__msg--viber" href="<?php echo esc_attr(kv_viber()); ?>" data-goal="viber" aria-label="Viber"><?php echo kv_icon('viber'); ?></a>
+	<?php if (kv_tg()) : ?><a class="kv-dock__msg kv-dock__msg--tg" href="<?php echo esc_url(kv_tg()); ?>" target="_blank" rel="noopener" data-goal="telegram" aria-label="Telegram"><?php echo kv_icon('telegram'); ?></a><?php endif; ?>
 </nav>
 
 <!-- Модальные окна -->
