@@ -9,18 +9,10 @@
 <?php wp_body_open(); ?>
 <a class="kv-skip" href="#main">Перейти к содержимому</a>
 
-<div class="kv-topbar">
-	<div class="kv-wrap kv-topbar__in">
-		<span class="kv-topbar__item"><?php echo kv_icon('pin'); ?><?php echo esc_html(kv_opt('address')); ?></span>
-		<span class="kv-topbar__item"><?php echo kv_icon('clock'); ?><?php echo esc_html(kv_opt('hours')); ?></span>
-		<span class="kv-topbar__item kv-topbar__item--accent"><?php echo kv_icon('truck'); ?>Доставка по всей Беларуси 1–3 дня</span>
-	</div>
-</div>
-
 <header class="kv-header" data-kv-header>
 	<div class="kv-wrap kv-header__in">
 		<a class="kv-logo" href="<?php echo esc_url(home_url('/')); ?>" aria-label="KOVRIKIEVABY — на главную">
-			<img src="<?php echo esc_url(kv_upload('2021/05/logo.png')); ?>" alt="KOVRIKIEVABY" width="160" height="48" decoding="async">
+			<img src="<?php echo esc_url(kv_upload('2021/05/logo.png')); ?>" alt="KOVRIKIEVABY" width="97" height="91" decoding="async">
 		</a>
 
 		<nav class="kv-nav" id="kv-nav" aria-label="Главное меню">
@@ -49,14 +41,8 @@
 		</nav>
 
 		<div class="kv-header__contacts">
-			<div class="kv-msgs">
-				<a class="kv-msg kv-msg--viber" href="<?php echo esc_attr(kv_viber()); ?>" aria-label="Написать в Viber" data-goal="viber"><?php echo kv_icon('viber'); ?></a>
-				<?php if (kv_tg()) : ?><a class="kv-msg kv-msg--tg" href="<?php echo esc_url(kv_tg()); ?>" target="_blank" rel="noopener" aria-label="Написать в Telegram" data-goal="telegram"><?php echo kv_icon('telegram'); ?></a><?php endif; ?>
-			</div>
-			<div class="kv-header__phone">
-				<a href="<?php echo esc_attr(kv_tel()); ?>" data-goal="call"><?php echo esc_html(kv_opt('phone_label')); ?></a>
-				<button type="button" class="kv-link" data-modal="callback">Обратный звонок</button>
-			</div>
+			<div class="kv-hinfo"><span class="kv-hinfo__ic"><?php echo kv_icon('clock'); ?></span><span><?php echo str_replace(', ', '<br>', esc_html(kv_opt('hours'))); ?></span></div>
+			<div class="kv-hinfo"><span class="kv-hinfo__ic kv-hinfo__ic--fill"><?php echo kv_icon('phone'); ?></span><a href="<?php echo esc_attr(kv_tel()); ?>" data-goal="call"><?php echo esc_html(kv_opt('phone_label')); ?></a></div>
 		</div>
 
 		<a class="kv-header__call" href="<?php echo esc_attr(kv_tel()); ?>" aria-label="Позвонить" data-goal="call"><?php echo kv_icon('phone'); ?></a>

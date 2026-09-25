@@ -29,6 +29,7 @@ if ($c) {
 			</div>
 			<div class="kv-delivery__map"><?php echo kv_img('2024/12/karta-belarusi.jpg', 'Карта доставки по Беларуси'); ?></div>
 		</div>
+		<p class="kv-center"><button type="button" class="kv-btn kv-btn--ghost" data-modal="cities">Выбрать свой город</button></p>
 		<ul class="kv-citylinks">
 			<?php if ($city) : ?>
 				<li><a href="<?php echo esc_url(kv_url($link_dir)); ?>">Минск</a></li>
