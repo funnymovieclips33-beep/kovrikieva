@@ -460,3 +460,13 @@ ul,ol{margin:0 0 1em;padding-left:1.25em}
 	.kv-hero__img img{max-height:260px}
 	.kv-thumbs{grid-template-columns:repeat(4,1fr);margin-top:16px}
 }
+
+/* ===== v4: карточка баннера с поворотом, белая кнопка видео ===== */
+.kv-hero__img{background:linear-gradient(135deg,#e9e9e9,#cfcfcf);border-radius:18px;padding:24px 28px;box-shadow:0 18px 40px rgba(0,0,0,.28);transform:perspective(1200px) rotate(-8deg) rotateX(8deg) rotateY(-6deg);transition:transform .6s cubic-bezier(.2,.7,.2,1),box-shadow .6s;max-width:560px;margin:0 auto}
+.kv-hero__img:hover{transform:none;box-shadow:0 12px 30px rgba(0,0,0,.22)}
+.kv-hero__img img{max-height:320px}
+.kv-play{background:rgba(255,255,255,.85);color:#6b6b6b;box-shadow:0 4px 18px rgba(0,0,0,.2);animation:none;transition:transform .25s,background .25s}
+.kv-play:hover{background:#fff;transform:translate(-50%,-50%) scale(1.08)}
+@media (max-width:980px){.kv-hero__img{transform:rotate(-4deg);padding:14px;max-width:420px}.kv-hero__img img{max-height:240px}}
+@media (prefers-reduced-motion:reduce){.kv-hero__img{transform:none}}
+.kv-hero{padding-top:56px;padding-bottom:56px}.kv-hero__img{max-width:520px}
