@@ -1,22 +1,24 @@
 <?php
-/** Видео + слайдер сравнения структур «Ромбы / Соты» (только ЭВА). */
+/** Характеристики материала + слайдер сравнения структур «Ромбы / Соты» (только ЭВА). */
 defined('ABSPATH') || exit;
 ['d' => $d] = $args;
 if (empty($d['textures'])) {
 	return;
 }
 [$a, $b] = $d['textures'];
-$video  = trim(kv_opt('video2'));
-$poster = $video ? kv_video_poster($video) : '';
 ?>
 <section class="kv-sec kv-tex">
 	<div class="kv-wrap kv-tex__grid">
-		<?php if ($video) : ?>
-			<button type="button" class="kv-tex__video" data-video="<?php echo esc_attr($video); ?>" aria-label="Смотреть видео о ковриках ЭВА">
-				<?php if ($poster) : ?><img src="<?php echo esc_url($poster); ?>" alt="Видео о ковриках ЭВА" loading="lazy" decoding="async" width="640" height="360"><?php endif; ?>
-				<span class="kv-tex__play"><?php echo kv_icon('play'); ?></span>
-			</button>
-		<?php endif; ?>
+		<div class="kv-specs">
+			<p class="kv-specs__title">Материал, который служит годами</p>
+			<ul class="kv-specs__grid">
+				<li><b>10–11<small> мм</small></b><span>толщина коврика</span></li>
+				<li><b>7–8<small> мм</small></b><span>глубина ячеек — вода и грязь остаются внутри</span></li>
+				<li><b>−70…+50<small>°C</small></b><span>не трескается и не дубеет</span></li>
+				<li><b>300+</b><span>сочетаний цвета материала и окантовки</span></li>
+			</ul>
+			<button type="button" class="kv-btn kv-btn--light" data-modal="order" data-product="<?php echo esc_attr($d['short']); ?>">Подобрать цвет</button>
+		</div>
 		<div class="kv-compare" data-compare style="--pos:50%">
 			<?php echo kv_img($b[1], 'Структура коврика ЭВА: ' . $b[0], 'kv-compare__img'); ?>
 			<div class="kv-compare__top"><?php echo kv_img($a[1], 'Структура коврика ЭВА: ' . $a[0], 'kv-compare__img'); ?></div>
