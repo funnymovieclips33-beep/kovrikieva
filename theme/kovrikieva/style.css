@@ -1,0 +1,11 @@
+/*
+Theme Name: KovrikiEVA
+Theme URI: https://kovrikieva.by/
+Author: KOVRIKIEVABY
+Description: Быстрая конверсионная тема для kovrikieva.by — коврики ЭВА, ворсовые, органайзеры, коврики для дома. Без конструкторов и jQuery. Городские страницы генерируются автоматически, старые URL и SEO-мета сохранены.
+Version: 1.0.0
+Requires at least: 6.2
+Requires PHP: 7.4
+Text Domain: kovrikieva
+*/
+/* Стили темы находятся в assets/css/main.css и встраиваются в <head> для максимальной скорости. */
