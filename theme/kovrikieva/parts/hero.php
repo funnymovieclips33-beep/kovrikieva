@@ -20,7 +20,7 @@ $h1 = $city && !empty($d['h1_city']) ? kv_tpl($d['h1_city'], $city) : $d['h1'];
 			<?php endif; ?>
 
 			<div class="kv-hero__cta">
-				<button type="button" class="kv-btn kv-btn--lg" data-modal="order" data-product="<?php echo esc_attr($d['short']); ?>"><?php echo esc_html($d['cta']); ?><?php echo kv_icon('gift'); ?></button>
+				<button type="button" class="kv-btn kv-btn--lg" data-modal="order" data-product="<?php echo esc_attr($d['short']); ?>"><?php echo esc_html($d['cta']); ?></button>
 			</div>
 
 		</div>
