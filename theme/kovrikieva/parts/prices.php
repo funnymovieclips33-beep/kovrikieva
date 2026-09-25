@@ -2,8 +2,8 @@
 defined('ABSPATH') || exit;
 ['key' => $key, 'd' => $d, 'city' => $city] = $args;
 $p = $d['prices'] ?? null;
-if (!$p) {
-	return;
+if (!$p || (!empty($d['constructor']) && $p['type'] === 'cards')) {
+	return; // цены ЭВА показаны в конструкторе
 }
 $title = $p['title'] . ($city ? ' ' . kv_city_in($city) : '');
 ?>

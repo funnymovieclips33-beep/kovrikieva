@@ -15,6 +15,9 @@ function kv_seo_plugin_active() {
 /** Текущий путь без слешей: '', 'brest', 'vorsovye-kovriki/brest', 'o-nas'. */
 function kv_current_path() {
 	$ctx = kv_ctx();
+	if ($ctx && !empty($ctx['brand'])) {
+		return $ctx['brand'] === '_hub' ? 'kovriki' : 'kovriki/' . $ctx['brand'];
+	}
 	if ($ctx) {
 		$d = kv_direction($ctx['dir']);
 		return trim($d['base'] . ($ctx['city'] ? '/' . $ctx['city'] : ''), '/');
@@ -37,6 +40,16 @@ function kv_meta() {
 		return $meta = $legacy[$path];
 	}
 	$ctx = kv_ctx();
+	if ($ctx && !empty($ctx['brand'])) {
+		if ($ctx['brand'] === '_hub') {
+			return $meta = ['Коврики для авто по маркам — ЭВА и ворсовые коврики на заказ в Минске', 'Коврики ЭВА и ворсовые коврики для Volkswagen, Toyota, Geely, BMW, Mercedes-Benz, Audi и других марок. Изготовление по лекалам за 24 часа, доставка по Беларуси.'];
+		}
+		$b = kv_brand($ctx['brand']);
+		return $meta = [
+			'Коврики для ' . $b[0] . ' (' . $b[1] . ') — ЭВА и ворсовые в салон и багажник, Минск',
+			'Коврики для ' . $b[0] . ' ' . implode(', ', array_slice($b[2], 0, 4)) . ' и других моделей по заводским лекалам: ЭВА от 30 руб., ворсовые от 25 руб. Изготовление за 24 часа, доставка по РБ.',
+		];
+	}
 	if ($ctx) {
 		$d = kv_direction($ctx['dir']);
 		$t = !empty($d['city_title']) ? kv_tpl($d['city_title'], $ctx['city']) : $d['h1'];
@@ -160,7 +173,7 @@ add_action('wp_head', function () {
 		$graph[] = [
 			'@type'       => 'Product',
 			'@id'         => $canon . '#product',
-			'name'        => kv_tpl(!empty($city) && !empty($d['h1_city']) ? $d['h1_city'] : $d['h1'], $city),
+			'name'        => !empty($ctx['brand']) ? kv_meta()[0] : kv_tpl(!empty($city) && !empty($d['h1_city']) ? $d['h1_city'] : $d['h1'], $city),
 			'description' => wp_strip_all_tags(kv_tpl($d['lead'], $city)),
 			'image'       => array_values(array_map('kv_upload', array_filter(array_merge([$d['hero_img']], $d['hero_thumbs'] ?? [])))),
 			'brand'       => ['@type' => 'Brand', 'name' => 'KOVRIKIEVABY'],
@@ -185,7 +198,12 @@ add_action('wp_head', function () {
 		}
 
 		$crumbs = [['Главная', $site]];
-		if ($d['base'] !== '') {
+		if (!empty($ctx['brand'])) {
+			$crumbs[] = ['Коврики по маркам', kv_brand_url()];
+			if ($ctx['brand'] !== '_hub') {
+				$crumbs[] = [kv_brand($ctx['brand'])[0], $canon];
+			}
+		} elseif ($d['base'] !== '') {
 			$crumbs[] = [$d['menu'], kv_url($ctx['dir'])];
 		}
 		if ($city) {
@@ -207,7 +225,12 @@ add_action('wp_head', function () {
 function kv_breadcrumbs() {
 	$ctx = kv_ctx();
 	$items = [['Главная', home_url('/')]];
-	if ($ctx) {
+	if ($ctx && !empty($ctx['brand'])) {
+		$items[] = ['Коврики по маркам', $ctx['brand'] === '_hub' ? null : kv_brand_url()];
+		if ($ctx['brand'] !== '_hub') {
+			$items[] = [kv_brand($ctx['brand'])[0], null];
+		}
+	} elseif ($ctx) {
 		$d = kv_direction($ctx['dir']);
 		if ($d['base'] !== '') {
 			$items[] = [$d['menu'], $ctx['city'] ? kv_url($ctx['dir']) : null];

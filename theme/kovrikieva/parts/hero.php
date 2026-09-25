@@ -28,7 +28,7 @@ $h1 = $city && !empty($d['h1_city']) ? kv_tpl($d['h1_city'], $city) : $d['h1'];
 		<div class="kv-hero__media">
 			<div class="kv-hero__img">
 				<?php echo kv_img($d['hero_img'], $h1, '', true); ?>
-				<?php if ($key === 'eva') : ?>
+				<?php if ($key === 'eva' && empty(kv_ctx()['brand'])) : ?>
 					<button type="button" class="kv-play" data-video="<?php echo esc_attr(kv_hero_video()); ?>" data-ratio="vertical" aria-label="Смотреть видео"><?php echo kv_icon('play'); ?></button>
 				<?php endif; ?>
 			</div>

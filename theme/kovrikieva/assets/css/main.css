@@ -814,3 +814,51 @@ body{line-height:1.65;color:#333}
 .kvc__total b{font-size:1.6rem;color:var(--c-brand)}
 .kvc__total em{flex:1 1 100%;font-style:normal;font-size:.85rem;font-weight:600;color:var(--c-brand)}
 @media (max-width:600px){.kvc__sets{grid-template-columns:1fr 1fr}}
+
+/* ===== v12: марки, сравнение, конструктор-цены, запасные логотипы ===== */
+.kv-brand__logo{position:relative}
+.kv-brand__logo:not(:has(img))::after,.kv-blinks__logo:not(:has(img))::after{content:attr(data-name);font:800 .95rem var(--ff);color:var(--c-brand);text-align:center;line-height:1.1}
+.kvc-set__img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;border-radius:4px;margin-bottom:4px}
+.kvc__sets{grid-template-columns:repeat(3,1fr)}
+/* типы ковриков для марки */
+.kv-btypes__grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:36px}
+.kv-btype{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center}
+.kv-btype__img{aspect-ratio:1;background:#f4f1f0;border-radius:4px;overflow:hidden}
+.kv-btype__img img{width:100%;height:100%;object-fit:contain}
+.kv-btype h3{margin:0 0 6px;font:700 1.2rem var(--ff);color:#333}
+.kv-btype p{margin:0 0 8px;color:#555;font-size:.95rem}
+.kv-btype__price{font:800 1.4rem var(--ff)!important;color:var(--c-brand)!important}
+.kv-btype__cta{display:flex;align-items:center;gap:16px}
+.kv-link-more{font-weight:600;text-decoration:none}
+.kv-models__title{font-weight:700;color:#333;margin:0 0 12px}
+.kv-models{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
+.kv-models button{padding:7px 12px;border:1px solid var(--c-brand);border-radius:4px;background:#fff;color:#333;font-size:.9rem;cursor:pointer;transition:.2s}
+.kv-models button:hover{background:var(--c-brand);color:#fff}
+@media (max-width:900px){.kv-btypes__grid{grid-template-columns:1fr}.kv-btype{grid-template-columns:110px 1fr;gap:14px}}
+/* ссылки на марки */
+.kv-blinks{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;list-style:none;margin:0;padding:0}
+.kv-blinks a{display:flex;align-items:center;gap:12px;padding:8px 12px 8px 8px;border:1px solid var(--c-line);border-radius:8px;background:#fff;color:#333;text-decoration:none;font-size:.92rem;transition:border-color .2s,box-shadow .2s}
+.kv-blinks a:hover{border-color:var(--c-brand);box-shadow:0 6px 16px rgba(113,57,57,.12);color:#333}
+.kv-blinks b{color:var(--c-brand)}
+.kv-blinks__logo{display:grid;place-items:center;width:40px;height:40px;flex:none;border-radius:8px;background:#f6f2f1;overflow:hidden}
+.kv-blinks__logo img{width:100%;height:100%;object-fit:contain;padding:4px;background:#fff}
+@media (max-width:600px){.kv-blinks{grid-template-columns:1fr 1fr}.kv-blinks a{font-size:.8rem;gap:8px}.kv-blinks__logo{width:32px;height:32px}}
+/* сравнение */
+.kv-cmp{border:1px dashed var(--c-brand);border-radius:4px;background:#fff;overflow:hidden}
+.kv-cmp__head,.kv-cmp__row{display:grid;grid-template-columns:1.1fr 1.3fr 1.2fr 1.2fr}
+.kv-cmp__head b,.kv-cmp__row>span{padding:14px 16px;border-bottom:1px solid #eee}
+.kv-cmp__head b{font-size:1rem;color:#333;background:#f6f2f1}
+.kv-cmp__head b.is-eva{background:var(--c-brand);color:#fff}
+.kv-cmp__row .is-eva{display:flex;gap:8px;align-items:flex-start;background:#fbf5f5;font-weight:600;color:#333}
+.kv-cmp__row .is-eva .kv-i{color:var(--c-brand);flex:none;margin-top:3px}
+.kv-cmp__k{font-weight:700;color:#333}
+.kv-cmp__row>span{color:#666;font-size:.94rem}
+@media (max-width:800px){
+	.kv-cmp__head{display:none}
+	.kv-cmp__row{grid-template-columns:1fr;border-bottom:1px dashed var(--c-brand)}
+	.kv-cmp__row>span{border:0;padding:6px 14px}
+	.kv-cmp__k{padding-top:14px!important;background:#f6f2f1;font-size:1rem}
+	.kv-cmp__row>span[data-l]::before{content:attr(data-l) ": ";font-weight:700;color:#333}
+	.kv-cmp__row>span:last-child{padding-bottom:14px}
+}
+@media (max-width:800px){.kv-cmp__row .is-eva{display:block}.kv-cmp__row .is-eva .kv-i{display:none}.kv-cmp__row>span[data-l]::before{margin-right:4px}}

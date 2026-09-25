@@ -43,9 +43,21 @@ function kv_ctx() {
 	return $kv_ctx ?? null;
 }
 
-function kv_set_ctx($dir, $city = null) {
+function kv_set_ctx($dir, $city = null, $brand = null) {
 	global $kv_ctx;
-	$kv_ctx = ['dir' => $dir, 'city' => $city ?: null];
+	$kv_ctx = ['dir' => $dir, 'city' => $city ?: null, 'brand' => $brand ?: null];
+}
+
+function kv_brands() { return kv_data('brands'); }
+
+function kv_brand($slug) {
+	$b = kv_brands();
+	return $slug && isset($b[$slug]) ? $b[$slug] : null;
+}
+
+/** URL страницы марки (или каталога марок). */
+function kv_brand_url($slug = '') {
+	return home_url('/kovriki/' . ($slug ? $slug . '/' : ''));
 }
 
 /** URL лендинга направления (с городом или без). Всегда со слешем на конце, как на старом сайте. */

@@ -9,6 +9,9 @@ if (empty($d['gallery'])) {
 }
 $all = kv_data('gallery');
 $g   = $all[$d['gallery']] ?? [];
+if (!empty($d['gallery_only'])) {
+	$g = array_intersect_key($g, [$d['gallery_only'] => 1]);
+}
 if (!$g) {
 	return;
 }
@@ -29,7 +32,7 @@ $logos = [
 			<?php foreach ($g as $brand => $imgs) : ?>
 				<li>
 					<button type="button" class="kv-brand" data-stories="<?php echo esc_attr(wp_json_encode(array_map('kv_upload', $imgs))); ?>" data-brand="<?php echo esc_attr($brand); ?>">
-						<span class="kv-brand__logo"><?php echo kv_img('2024/02/' . ($logos[$brand] ?? sanitize_title($brand) . '.jpg'), $brand); ?></span>
+						<span class="kv-brand__logo" data-name="<?php echo esc_attr($brand); ?>"><img src="<?php echo esc_url(kv_upload('2024/02/' . ($logos[$brand] ?? sanitize_title($brand) . '.jpg'))); ?>" alt="<?php echo esc_attr($brand); ?>" loading="lazy" decoding="async" onerror="this.remove()"></span>
 						<span class="kv-brand__name"><?php echo esc_html($brand); ?></span>
 					</button>
 				</li>

@@ -20,13 +20,18 @@ $sections = [
 	'prices',
 	'extra',
 	'gallery',
+	'compare',
 	'certificate',
 	'related',
 	'steps',
 	'city',
 	'faq',
+	'brands',
 	'delivery',
 ];
+if ($key !== 'eva') {
+	$sections = array_values(array_diff($sections, ['compare', 'brands']));
+}
 foreach (apply_filters('kv_sections', $sections, $key, $city) as $s) {
 	kv_part($s, $args);
 }

@@ -5,6 +5,7 @@
  */
 defined('ABSPATH') || exit;
 ['d' => $d] = $args;
+$city = $args['city'] ?? null;
 if (empty($d['constructor'])) {
 	return;
 }
@@ -31,7 +32,8 @@ $swatches = function ($set, $type, $sel) {
 ?>
 <section class="kv-sec kv-sec--alt kvc" id="constructor" data-kvc-root>
 	<div class="kv-wrap">
-		<h2 class="kv-h2 kv-h2--line">Соберите свой коврик</h2>
+		<h2 class="kv-h2 kv-h2--line"><?php echo esc_html($d['prices']['title'] . ($city ? ' ' . kv_city_in($city) : '')); ?></h2>
+		<p class="kv-gallery__sub">Соберите свой коврик: выберите комплект, фактуру и цвета — цена посчитается сразу</p>
 		<div class="kv-divider" aria-hidden="true"><?php echo kv_icon('target'); ?></div>
 
 		<div class="kvc__grid">
@@ -68,6 +70,7 @@ $swatches = function ($set, $type, $sel) {
 					<div class="kvc__sets">
 						<?php foreach ($d['prices']['items'] as $i => $it) : ?>
 							<button type="button" class="kvc-set<?php echo $i === 4 ? ' is-on' : ''; ?>" data-kvc="set" data-name="<?php echo esc_attr($it[0]); ?>" data-price="<?php echo (int) $it[1]; ?>" data-gift="<?php echo empty($it[3]) ? '0' : '1'; ?>" aria-pressed="<?php echo $i === 4 ? 'true' : 'false'; ?>">
+								<?php echo kv_img($it[2], $it[0], 'kvc-set__img'); ?>
 								<span class="kvc-set__name"><?php echo esc_html($it[0]); ?></span>
 								<span class="kvc-set__price">от <?php echo (int) $it[1]; ?> р.</span>
 								<?php if (!empty($it[3])) : ?><span class="kvc-set__gift"><?php echo kv_icon('gift'); ?>логотип в подарок</span><?php endif; ?>
