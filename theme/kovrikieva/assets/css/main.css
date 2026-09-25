@@ -432,3 +432,31 @@ ul,ol{margin:0 0 1em;padding-left:1.25em}
 .kv-logo{width:97px;height:var(--hdr);flex:none}
 .kv-logo img{position:absolute;top:0;left:0;box-shadow:0 3px 8px rgba(0,0,0,.25)}
 @media (max-width:980px){.kv-logo{width:68px}}
+
+/* ===== v3: как на оригинале ===== */
+.kv-logo img{background:var(--c-brand);box-shadow:none;border-radius:0 0 3px 3px;object-fit:contain;padding:6px}
+.kv-nav__list>li.is-active>a,.kv-nav__list>li>a[aria-current]{color:var(--c-brand);border-bottom-color:var(--c-brand)}
+.kv-hero{background:linear-gradient(90deg,#fff 0%,#fff 28%,#9a9a9a 100%);padding:30px 0 40px}
+.kv-hero__grid{grid-template-columns:1fr 1.45fr;min-height:0}
+.kv-hero__img img{max-height:340px;width:auto;margin:0 auto}
+.kv-hero__lead{max-width:24em;font-size:1.05rem}
+.kv-thumbs{grid-template-columns:repeat(4,minmax(0,250px));justify-content:start;margin-top:36px;margin-bottom:0}
+.kv-thumbs a{border-radius:0}
+.kv-thumbs+.kv-sec{padding-top:56px}
+/* подарок */
+.kv-gift{display:inline-flex;align-items:center;gap:10px;margin:0 auto 18px;padding:8px 14px 8px 8px;border:1.5px dashed var(--c-brand);border-radius:6px;background:#fff;text-align:left;font-size:.9rem;line-height:1.3;color:#414141}
+.kv-gift b{display:block;color:var(--c-brand);text-transform:uppercase;font-size:.95rem}
+.kv-gift__ic{display:grid;place-items:center;width:38px;height:38px;border-radius:4px;background:var(--c-brand);color:#fff;flex:none;animation:kv-wiggle 3s ease-in-out infinite}
+.kv-gift__ic .kv-i{width:22px;height:22px}
+@keyframes kv-wiggle{0%,86%,100%{transform:none}89%{transform:rotate(-10deg)}92%{transform:rotate(10deg)}95%{transform:rotate(-6deg)}}
+.kv-card{position:relative}
+.kv-card--gift{outline:2px solid var(--c-brand)}
+.kv-ribbon{position:absolute;z-index:2;top:12px;left:0;display:inline-flex;align-items:center;gap:6px;padding:6px 12px 6px 10px;background:var(--c-brand);color:#fff;font-size:.8rem;font-weight:700;text-transform:uppercase;border-radius:0 4px 4px 0;box-shadow:0 4px 10px rgba(0,0,0,.2)}
+.kv-ribbon .kv-i{width:16px;height:16px}
+/* видео 9:16 */
+.kv-lightbox .kv-lightbox__video{width:auto;height:min(88vh,calc(92vw * 16 / 9));aspect-ratio:9/16;max-width:92vw;border:0;border-radius:8px;background:#000}
+@media (max-width:980px){
+	.kv-hero{background:linear-gradient(180deg,#fff 45%,#bdbdbd 100%)}
+	.kv-hero__img img{max-height:260px}
+	.kv-thumbs{grid-template-columns:repeat(4,1fr);margin-top:16px}
+}

@@ -210,7 +210,7 @@
 			e.preventDefault();
 			var g = a.closest('[data-gallery-group]');
 			lbList = g ? $$('[data-lightbox]', g) : [a];
-			var fr = $('iframe', lb); if (fr) fr.remove();
+			var fr = $('.kv-lightbox__video', lb); if (fr) fr.remove();
 			lbImg.hidden = false;
 			$$('.kv-lightbox__nav', lb).forEach(function (b) { b.hidden = lbList.length < 2; });
 			lbShow(lbList.indexOf(a));
@@ -225,7 +225,7 @@
 			if (e.key === 'ArrowRight') lbShow(lbIdx + 1);
 			if (e.key === 'ArrowLeft') lbShow(lbIdx - 1);
 		});
-		lb.addEventListener('close', function () { var fr = $('iframe', lb); if (fr) fr.remove(); lbImg.removeAttribute('src'); });
+		lb.addEventListener('close', function () { var fr = $('.kv-lightbox__video', lb); if (fr) fr.remove(); lbImg.removeAttribute('src'); });
 		var sx = 0;
 		lb.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
 		lb.addEventListener('touchend', function (e) {
@@ -238,10 +238,19 @@
 	d.addEventListener('click', function (e) {
 		var v = e.target.closest('[data-video]');
 		if (!v || !lb) return;
-		var fr = d.createElement('iframe');
-		fr.src = 'https://player.vimeo.com/video/' + encodeURIComponent(v.getAttribute('data-video')) + '?autoplay=1';
-		fr.allow = 'autoplay; fullscreen';
-		fr.allowFullscreen = true;
+		var src = v.getAttribute('data-video').trim(), fr, m;
+		if (/\.(mp4|webm|mov)(\?|$)/i.test(src)) {
+			fr = d.createElement('video');
+			fr.src = src; fr.controls = true; fr.autoplay = true; fr.playsInline = true;
+		} else {
+			fr = d.createElement('iframe');
+			if ((m = src.match(/(?:youtu\.be\/|shorts\/|[?&]v=|embed\/)([\w-]{11})/))) src = 'https://www.youtube.com/embed/' + m[1] + '?autoplay=1&playsinline=1';
+			else if ((m = src.match(/^(?:https?:\/\/)?(?:player\.)?vimeo\.com\/(?:video\/)?(\d+)/) || src.match(/^(\d+)$/))) src = 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1';
+			fr.src = src;
+			fr.allow = 'autoplay; fullscreen; picture-in-picture';
+			fr.allowFullscreen = true;
+		}
+		fr.className = 'kv-lightbox__video';
 		lbImg.hidden = true;
 		$$('.kv-lightbox__nav', lb).forEach(function (b) { b.hidden = true; });
 		lb.appendChild(fr);

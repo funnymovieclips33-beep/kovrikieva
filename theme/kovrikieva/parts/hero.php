@@ -15,6 +15,10 @@ $h1 = $city && !empty($d['h1_city']) ? kv_tpl($d['h1_city'], $city) : $d['h1'];
 				<span class="kv-hero__note"><?php echo esc_html($d['price_note']); ?></span>
 			</div>
 
+			<?php if (!empty($d['gift_note'])) : ?>
+				<p class="kv-gift"><span class="kv-gift__ic"><?php echo kv_icon('gift'); ?></span><span><b>Логотип в подарок</b><?php echo esc_html($d['gift_note']); ?></span></p>
+			<?php endif; ?>
+
 			<div class="kv-hero__cta">
 				<button type="button" class="kv-btn kv-btn--lg" data-modal="order" data-product="<?php echo esc_attr($d['short']); ?>"><?php echo esc_html($d['cta']); ?><?php echo kv_icon('gift'); ?></button>
 			</div>
@@ -31,6 +35,7 @@ $h1 = $city && !empty($d['h1_city']) ? kv_tpl($d['h1_city'], $city) : $d['h1'];
 
 		</div>
 	</div>
+</section>
 			<?php if (!empty($d['hero_thumbs'])) : ?>
 				<div class="kv-wrap kv-thumbs" data-gallery-group>
 					<?php foreach ($d['hero_thumbs'] as $i => $t) : ?>
@@ -38,4 +43,4 @@ $h1 = $city && !empty($d['h1_city']) ? kv_tpl($d['h1_city'], $city) : $d['h1'];
 					<?php endforeach; ?>
 				</div>
 			<?php endif; ?>
-</section>
+

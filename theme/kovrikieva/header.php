@@ -21,7 +21,8 @@
 			<?php else : ?>
 				<ul class="kv-nav__list">
 					<?php foreach (kv_menu_items() as $item) : ?>
-						<li class="<?php echo !empty($item[2]) ? 'has-sub' : ''; ?>">
+						<?php $kv_cur = (kv_ctx() && kv_url(kv_ctx()['dir']) === $item[1]) || (!empty($item[2]) && kv_ctx() && in_array(kv_url(kv_ctx()['dir']), array_column($item[2], 1), true)); ?>
+						<li class="<?php echo (!empty($item[2]) ? 'has-sub' : '') . ($kv_cur ? ' is-active' : ''); ?>">
 							<a href="<?php echo esc_url($item[1]); ?>"><?php echo esc_html($item[0]); ?><?php echo !empty($item[2]) ? kv_icon('chevron', 'kv-nav__chev') : ''; ?></a>
 							<?php if (!empty($item[2])) : ?>
 								<ul class="kv-nav__sub">

@@ -59,7 +59,7 @@ add_action('customize_register', function ($wp) {
 		'metrika'     => 'Яндекс.Метрика: номер счётчика',
 		'gads'        => 'Google Ads / GA4 ID (AW-… или G-…)',
 		'ya_org'      => 'ID организации в Яндекс.Картах (виджет отзывов)',
-		'video'       => 'Vimeo ID видео на главной',
+		'video'       => 'Видео 9:16 на страницах ЭВА (ссылка Vimeo / YouTube Shorts / .mp4)',
 		'geo_lat'     => 'Координаты: широта',
 		'geo_lng'     => 'Координаты: долгота',
 	];

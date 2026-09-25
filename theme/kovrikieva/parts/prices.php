@@ -14,7 +14,8 @@ $title = $p['title'] . ($city ? ' ' . kv_city_in($city) : '');
 		<?php if ($p['type'] === 'cards') : ?>
 			<div class="kv-cards">
 				<?php foreach ($p['items'] as $it) : ?>
-					<article class="kv-card">
+					<article class="kv-card<?php echo !empty($it[3]) ? ' kv-card--gift' : ''; ?>">
+						<?php if (!empty($it[3])) : ?><span class="kv-ribbon"><?php echo kv_icon('gift'); ?>Логотип в подарок</span><?php endif; ?>
 						<div class="kv-card__img"><?php echo kv_img($it[2], $it[0]); ?></div>
 						<div class="kv-card__body">
 							<h3 class="kv-card__title"><?php echo esc_html($it[0]); ?></h3>
