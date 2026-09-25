@@ -13,7 +13,7 @@ $current = $args['current'] ?? '';
 		<ul class="kv-blinks">
 			<?php foreach (kv_brands() as $slug => $b) : if ($slug === $current) { continue; } ?>
 				<li><a href="<?php echo esc_url(kv_brand_url($slug)); ?>">
-					<span class="kv-blinks__logo" data-name="<?php echo esc_attr(mb_substr($b[0], 0, 1)); ?>"><?php if ($b[3]) : ?><img src="<?php echo esc_url(kv_upload('2024/02/' . $b[3])); ?>" alt="" loading="lazy" decoding="async" onerror="this.remove()"><?php endif; ?></span>
+					<span class="kv-blinks__logo" data-name="<?php echo esc_attr(mb_substr($b[0], 0, 1)); ?>"><?php if ($b[3]) : ?><img src="<?php echo esc_url(kv_upload('2024/02/' . $b[3])); ?>" alt="" loading="lazy" decoding="async"><?php endif; ?></span>
 					<span>Коврики для <b><?php echo esc_html($b[0]); ?></b></span>
 				</a></li>
 			<?php endforeach; ?>

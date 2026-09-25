@@ -6,6 +6,16 @@
 	var $ = function (s, c) { return (c || d).querySelector(s); };
 	var $$ = function (s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); };
 
+	/* ---------- Фото: если нет .jpg — пробуем .webp (и наоборот), иначе убираем «битую» картинку ---------- */
+	d.addEventListener('error', function (e) {
+		var im = e.target;
+		if (im.tagName !== 'IMG') return;
+		if (im.dataset.alt) { if (im.closest('.kv-brand__logo,.kv-blinks__logo')) im.remove(); return; }
+		var s = im.getAttribute('src') || '';
+		var alt = /\.jpe?g$/i.test(s) ? s.replace(/\.jpe?g$/i, '.webp') : (/\.webp$/i.test(s) ? s.replace(/\.webp$/i, '.jpg') : '');
+		if (alt) { im.dataset.alt = 1; im.src = alt; }
+		else if (im.closest('.kv-brand__logo,.kv-blinks__logo')) im.remove();
+	}, true);
 	/* ---------- Цели аналитики ---------- */
 	function goal(name, params) {
 		try { if (window.ym && cfg.metrika) ym(+cfg.metrika, 'reachGoal', name, params || {}); } catch (e) {}
