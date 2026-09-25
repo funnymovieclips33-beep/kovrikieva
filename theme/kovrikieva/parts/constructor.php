@@ -64,27 +64,44 @@ $swatches = function ($set, $type, $sel) {
 
 			<div class="kvc__panel">
 				<div class="kvc__step">
-					<p class="kvc__label"><span>1</span>Фактура</p>
+					<p class="kvc__label"><span>1</span>Что изготовить</p>
+					<div class="kvc__sets">
+						<?php foreach ($d['prices']['items'] as $i => $it) : ?>
+							<button type="button" class="kvc-set<?php echo $i === 4 ? ' is-on' : ''; ?>" data-kvc="set" data-name="<?php echo esc_attr($it[0]); ?>" data-price="<?php echo (int) $it[1]; ?>" data-gift="<?php echo empty($it[3]) ? '0' : '1'; ?>" aria-pressed="<?php echo $i === 4 ? 'true' : 'false'; ?>">
+								<span class="kvc-set__name"><?php echo esc_html($it[0]); ?></span>
+								<span class="kvc-set__price">от <?php echo (int) $it[1]; ?> р.</span>
+								<?php if (!empty($it[3])) : ?><span class="kvc-set__gift"><?php echo kv_icon('gift'); ?>логотип в подарок</span><?php endif; ?>
+							</button>
+						<?php endforeach; ?>
+					</div>
+				</div>
+				<div class="kvc__step">
+					<p class="kvc__label"><span>2</span>Фактура</p>
 					<div class="kvc__tex">
 						<button type="button" class="kvc-texbtn is-on" data-kvc="tex" data-name="Соты" data-val="honey" aria-pressed="true"><svg viewBox="0 0 150 40"><rect width="150" height="40" fill="#6f7174"/><rect width="150" height="40" fill="url(#kvc-honey)"/></svg>Соты</button>
 						<button type="button" class="kvc-texbtn" data-kvc="tex" data-name="Ромбы" data-val="dia" aria-pressed="false"><svg viewBox="0 0 150 40"><rect width="150" height="40" fill="#6f7174"/><rect width="150" height="40" fill="url(#kvc-dia)"/></svg>Ромбы</button>
 					</div>
 				</div>
 				<div class="kvc__step">
-					<p class="kvc__label"><span>2</span>Цвет материала: <b data-kvc-out="mat">Черный</b></p>
+					<p class="kvc__label"><span>3</span>Цвет материала: <b data-kvc-out="mat">Черный</b></p>
 					<div class="kvc__sws"><?php $swatches($mat, 'mat', 'Черный'); ?></div>
 				</div>
 				<div class="kvc__step">
-					<p class="kvc__label"><span>3</span>Цвет канта: <b data-kvc-out="kant">Красный</b></p>
+					<p class="kvc__label"><span>4</span>Цвет канта: <b data-kvc-out="kant">Красный</b></p>
 					<div class="kvc__sws"><?php $swatches($kant, 'kant', 'Красный'); ?></div>
 				</div>
 				<div class="kvc__step">
-					<p class="kvc__label"><span>4</span>Подпятник</p>
+					<p class="kvc__label"><span>5</span>Подпятник</p>
 					<div class="kvc__chips">
-						<?php $i = 0; foreach ($heels as $k => $label) : ?>
-							<button type="button" class="kvc-chip<?php echo $i === 1 ? ' is-on' : ''; ?>" data-kvc="heel" data-val="<?php echo esc_attr($k); ?>" data-name="<?php echo esc_attr($label); ?>" aria-pressed="<?php echo $i++ === 1 ? 'true' : 'false'; ?>"><?php echo esc_html($label); ?></button>
+						<?php $i = 0; foreach ($heels as $k => [$label, $add]) : ?>
+							<button type="button" class="kvc-chip<?php echo $i === 1 ? ' is-on' : ''; ?>" data-kvc="heel" data-val="<?php echo esc_attr($k); ?>" data-name="<?php echo esc_attr($label); ?>" data-price="<?php echo (int) $add; ?>" aria-pressed="<?php echo $i++ === 1 ? 'true' : 'false'; ?>"><?php echo esc_html($label); ?></button>
 						<?php endforeach; ?>
 					</div>
+				</div>
+				<div class="kvc__total">
+					<span>Итого:</span>
+					<b>от <span data-kvc-total>155</span> руб.</b>
+					<em data-kvc-gift>+ логотип марки авто в подарок</em>
 				</div>
 				<button type="button" class="kv-btn kv-btn--lg kv-btn--block kvc__cta" data-modal="order" data-kvc-cta data-product="Коврики ЭВА">Заказать в этих цветах</button>
 			</div>

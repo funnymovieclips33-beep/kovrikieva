@@ -5,48 +5,19 @@ $dir = $ctx ? kv_direction($ctx['dir']) : null;
 </main>
 
 <footer class="kv-footer">
-	<div class="kv-wrap kv-footer__grid">
-		<div>
-			<img class="kv-footer__logo" src="<?php echo esc_url(kv_upload('2021/05/logo.png')); ?>" alt="KOVRIKIEVABY" width="160" height="48" loading="lazy" decoding="async">
-			<p>Производство ковриков ЭВА и ворсовых ковриков для авто, дома и лодок, органайзеров в багажник. Изготовление за 24 часа, доставка по всей Беларуси.</p>
-			<div class="kv-msgs">
-				<a class="kv-msg kv-msg--viber" href="<?php echo esc_attr(kv_viber()); ?>" aria-label="Viber" data-goal="viber"><?php echo kv_icon('viber'); ?></a>
-				<?php if (kv_tg()) : ?><a class="kv-msg kv-msg--tg" href="<?php echo esc_url(kv_tg()); ?>" target="_blank" rel="noopener" aria-label="Telegram" data-goal="telegram"><?php echo kv_icon('telegram'); ?></a><?php endif; ?>
-				<?php if (kv_opt('instagram')) : ?><a class="kv-msg kv-msg--ig" href="<?php echo esc_url(kv_opt('instagram')); ?>" target="_blank" rel="noopener" aria-label="Instagram"><?php echo kv_icon('instagram'); ?></a><?php endif; ?>
-			</div>
-		</div>
-		<div>
-			<p class="kv-footer__title">Для авто</p>
-			<ul>
-				<li><a href="<?php echo esc_url(kv_url('eva')); ?>">Коврики ЭВА</a></li>
-				<li><a href="<?php echo esc_url(kv_url('vorsovye-kovriki')); ?>">Ворсовые коврики</a></li>
-				<li><a href="<?php echo esc_url(kv_url('kovrik-v-bagazhnik')); ?>">Коврик в багажник</a></li>
-				<li><a href="<?php echo esc_url(kv_url('organajzer-v-bagazhnik')); ?>">Органайзеры (автокейсы)</a></li>
-				<li><a href="<?php echo esc_url(kv_url('v-lodku')); ?>">Коврик в лодку</a></li>
-				<li><a href="<?php echo esc_url(kv_url('dlja-doma')); ?>">Коврики для дома</a></li>
-			</ul>
-		</div>
-		<div>
-			<p class="kv-footer__title">Компания</p>
-			<ul>
-				<li><a href="<?php echo esc_url(home_url('/o-nas/')); ?>">О компании</a></li>
-				<li><a href="<?php echo esc_url(home_url('/fotogalereya/')); ?>">Фотогалерея</a></li>
-				<li><a href="<?php echo esc_url(home_url('/otzyvy/')); ?>">Отзывы</a></li>
-				<li><a href="<?php echo esc_url(home_url('/zakazat/')); ?>">Заказать</a></li>
-				<li><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Политика конфиденциальности</a></li>
-			</ul>
-		</div>
-		<div>
-			<p class="kv-footer__title">Контакты</p>
-			<p><a class="kv-footer__phone" href="<?php echo esc_attr(kv_tel()); ?>" data-goal="call"><?php echo esc_html(kv_opt('phone_label')); ?></a></p>
-			<p><?php echo esc_html(kv_opt('address')); ?><br><?php echo esc_html(kv_opt('hours')); ?></p>
-			<p><a href="mailto:<?php echo esc_attr(kv_opt('email')); ?>"><?php echo esc_html(kv_opt('email')); ?></a></p>
-			<button type="button" class="kv-btn kv-btn--ghost" data-modal="callback">Обратный звонок</button>
-		</div>
-	</div>
-	<div class="kv-wrap kv-footer__bottom">
-		<p>© <?php echo esc_html(date('Y')); ?> KOVRIKIEVABY. Информация на сайте носит ознакомительный характер, цены и наличие уточняйте по телефону.</p>
-	</div>
+	<?php kv_part('contacts'); ?>
+	<nav class="kv-footer__links kv-wrap" aria-label="Разделы сайта">
+		<a href="<?php echo esc_url(kv_url('eva')); ?>">Коврики ЭВА</a>
+		<a href="<?php echo esc_url(kv_url('vorsovye-kovriki')); ?>">Ворсовые коврики</a>
+		<a href="<?php echo esc_url(kv_url('kovrik-v-bagazhnik')); ?>">Коврик в багажник</a>
+		<a href="<?php echo esc_url(kv_url('organajzer-v-bagazhnik')); ?>">Автокейсы</a>
+		<a href="<?php echo esc_url(kv_url('v-lodku')); ?>">В лодку</a>
+		<a href="<?php echo esc_url(kv_url('dlja-doma')); ?>">Для дома</a>
+		<a href="<?php echo esc_url(home_url('/o-nas/')); ?>">О компании</a>
+		<a href="<?php echo esc_url(home_url('/otzyvy/')); ?>">Отзывы</a>
+	</nav>
+	<div class="kv-footer__line"><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Политика конфиденциальности</a></div>
+	<div class="kv-footer__line">Copyright © <?php echo esc_html(date('Y')); ?> Коврики EVA для автомобиля и дома в Минске, официальный сайт</div>
 </footer>
 
 <!-- Мобильная панель действий -->

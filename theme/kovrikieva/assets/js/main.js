@@ -294,10 +294,14 @@
 	/* ---------- Конструктор коврика ---------- */
 	$$('[data-kvc-root]').forEach(function (root) {
 		var svg = $('.kvc__svg', root), cta = $('[data-kvc-cta]', root);
-		var st = { tex: 'Соты', mat: 'Черный', kant: 'Красный', heel: 'Полимерный (+15 р.)' };
+		var st = { set: 'Полный комплект', tex: 'Соты', mat: 'Черный', kant: 'Красный', heel: 'Полимерный (+15 р.)' };
 		svg.setAttribute('data-tex', 'honey'); svg.setAttribute('data-heel', 'poly');
 		function sync() {
-			cta.setAttribute('data-product', 'Коврики ЭВА: ' + st.tex + ', материал ' + st.mat.toLowerCase() + ', кант ' + st.kant.toLowerCase() + ', ' + st.heel.replace(/ \(.*\)/, '').toLowerCase() + (st.heel.indexOf('Без') === 0 ? '' : ' подпятник'));
+			var sb = $('[data-kvc=set].is-on', root), hb = $('[data-kvc=heel].is-on', root);
+			var tot = (sb ? +sb.getAttribute('data-price') : 0) + (hb ? +hb.getAttribute('data-price') : 0);
+			var tEl = $('[data-kvc-total]', root); if (tEl) tEl.textContent = tot;
+			var gEl = $('[data-kvc-gift]', root); if (gEl) gEl.hidden = !(sb && sb.getAttribute('data-gift') === '1');
+			cta.setAttribute('data-product', st.set + ' ЭВА: ' + st.tex + ', материал ' + st.mat.toLowerCase() + ', кант ' + st.kant.toLowerCase() + ', ' + st.heel.replace(/ \(.*\)/, '').toLowerCase() + (st.heel.indexOf('Без') === 0 ? '' : ' подпятник'));
 		}
 		root.addEventListener('click', function (e) {
 			var b = e.target.closest('[data-kvc]');
@@ -308,7 +312,7 @@
 			if (t === 'mat' || t === 'kant') {
 				svg.style.setProperty('--' + t, b.getAttribute('data-hex'));
 				var o = $('[data-kvc-out="' + t + '"]', root); if (o) o.textContent = st[t];
-			} else {
+			} else if (t !== 'set') {
 				svg.setAttribute('data-' + t, b.getAttribute('data-val'));
 			}
 			sync();

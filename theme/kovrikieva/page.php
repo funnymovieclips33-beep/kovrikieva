@@ -16,5 +16,4 @@ while (have_posts()) : the_post();
 	<?php
 endwhile;
 kv_part('related', ['key' => '', 'd' => ['related' => ['eva', 'vorsovye-kovriki', 'organajzer-v-bagazhnik', 'dlja-doma']], 'city' => null]);
-kv_part('contacts', ['key' => '', 'd' => [], 'city' => null]);
 get_footer();

@@ -8,15 +8,18 @@ $cat = kv_catalog();
 ?>
 <section class="kv-sec kv-related">
 	<div class="kv-wrap">
-		<h2 class="kv-h2">Сопутствующие товары</h2>
-		<div class="kv-cards kv-cards--sm">
+		<h2 class="kv-h2 kv-h2--line">Сопутствующие товары</h2>
+		<div class="kv-divider" aria-hidden="true"><?php echo kv_icon('target'); ?></div>
+		<p class="kvp-hint"><span>i</span>Нажмите или наведите на карточку товара, чтобы узнать стоимость и сделать заказ</p>
+		<div class="kvp-grid">
 			<?php foreach ($d['related'] as $k) : if (empty($cat[$k])) { continue; } [$t, $p, $img, $url] = $cat[$k]; ?>
-				<article class="kv-card">
-					<a class="kv-card__img" href="<?php echo esc_url($url); ?>" tabindex="-1"><?php echo kv_img($img, $t); ?></a>
-					<div class="kv-card__body">
-						<h3 class="kv-card__title"><a href="<?php echo esc_url($url); ?>"><?php echo esc_html($t); ?></a></h3>
-						<p class="kv-card__price"><?php echo esc_html(kv_price($p)); ?></p>
-						<a class="kv-card__more" href="<?php echo esc_url($url); ?>">Подробнее <?php echo kv_icon('arrow'); ?></a>
+				<article class="kvp kvp--photo" tabindex="0">
+					<?php echo kv_img($img, $t); ?>
+					<div class="kvp__ov">
+						<h3 class="kvp__title"><?php echo esc_html($t); ?></h3>
+						<p class="kvp__price"><?php echo esc_html(kv_price($p)); ?></p>
+						<button type="button" class="kvp__btn" data-modal="order" data-product="<?php echo esc_attr($t); ?>">Заказать</button>
+						<a class="kvp__more" href="<?php echo esc_url($url); ?>">Подробнее →</a>
 					</div>
 				</article>
 			<?php endforeach; ?>

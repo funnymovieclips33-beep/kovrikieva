@@ -19,16 +19,13 @@ $sections = [
 	'constructor',
 	'prices',
 	'extra',
-	'cta-form',
 	'gallery',
 	'certificate',
-	'city',
-	'steps',
-	'faq',
-	'text',
 	'related',
+	'steps',
+	'city',
+	'faq',
 	'delivery',
-	'contacts',
 ];
 foreach (apply_filters('kv_sections', $sections, $key, $city) as $s) {
 	kv_part($s, $args);
