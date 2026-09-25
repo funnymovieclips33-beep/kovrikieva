@@ -276,6 +276,32 @@
 		r.addEventListener('input', set); set();
 	});
 
+	/* ---------- Конструктор коврика ---------- */
+	$$('[data-kvc-root]').forEach(function (root) {
+		var svg = $('.kvc__svg', root), cta = $('[data-kvc-cta]', root);
+		var st = { tex: 'Соты', mat: 'Черный', kant: 'Красный', heel: 'Полимерный (+15 р.)' };
+		svg.setAttribute('data-tex', 'honey'); svg.setAttribute('data-heel', 'poly');
+		function sync() {
+			cta.setAttribute('data-product', 'Коврики ЭВА: ' + st.tex + ', материал ' + st.mat.toLowerCase() + ', кант ' + st.kant.toLowerCase() + ', ' + st.heel.replace(/ \(.*\)/, '').toLowerCase() + (st.heel.indexOf('Без') === 0 ? '' : ' подпятник'));
+		}
+		root.addEventListener('click', function (e) {
+			var b = e.target.closest('[data-kvc]');
+			if (!b) return;
+			var t = b.getAttribute('data-kvc');
+			$$('[data-kvc="' + t + '"]', root).forEach(function (x) { x.classList.toggle('is-on', x === b); x.setAttribute('aria-pressed', x === b); });
+			st[t] = b.getAttribute('data-name');
+			if (t === 'mat' || t === 'kant') {
+				svg.style.setProperty('--' + t, b.getAttribute('data-hex'));
+				var o = $('[data-kvc-out="' + t + '"]', root); if (o) o.textContent = st[t];
+			} else {
+				svg.setAttribute('data-' + t, b.getAttribute('data-val'));
+			}
+			sync();
+			goal('constructor');
+		});
+		sync();
+	});
+
 	/* ---------- Карта: загрузка по клику или при приближении ---------- */
 	function loadMap(box) {
 		if (box.dataset.loaded) return;

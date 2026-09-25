@@ -17,6 +17,7 @@ $sections = [
 	'hero',
 	'advantages',
 	'textures',
+	'constructor',
 	'prices',
 	'extra',
 	'cta-form',
