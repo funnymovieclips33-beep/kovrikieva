@@ -107,6 +107,18 @@ $dir = $ctx ? kv_direction($ctx['dir']) : null;
 	<button class="kv-lightbox__nav kv-lightbox__next" type="button" data-lb="1" aria-label="Следующее">›</button>
 </dialog>
 
+<dialog class="kv-stories" id="kv-stories" aria-label="Фото работ">
+	<div class="kv-stories__bg" data-st-bg></div>
+	<div class="kv-stories__frame">
+		<div class="kv-stories__bars" data-st-bars></div>
+		<p class="kv-stories__brand" data-st-brand></p>
+		<button class="kv-stories__close" type="button" data-close aria-label="Закрыть"><?php echo kv_icon('close'); ?></button>
+		<img alt="" data-st-img>
+		<button class="kv-stories__nav kv-stories__nav--prev" type="button" data-st="-1" aria-label="Предыдущее фото">‹</button>
+		<button class="kv-stories__nav kv-stories__nav--next" type="button" data-st="1" aria-label="Следующее фото">›</button>
+	</div>
+</dialog>
+
 <?php wp_footer(); ?>
 </body>
 </html>

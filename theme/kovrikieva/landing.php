@@ -16,7 +16,6 @@ get_header();
 $sections = [
 	'hero',
 	'advantages',
-	'textures',
 	'constructor',
 	'prices',
 	'extra',

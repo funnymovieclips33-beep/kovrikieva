@@ -182,28 +182,50 @@
 		});
 	});
 
-	/* ---------- Табы галереи (фото грузятся только при открытии вкладки) ---------- */
-	d.addEventListener('click', function (e) {
-		var tab = e.target.closest('[data-tab]');
-		if (!tab) return;
-		var sec = tab.closest('section');
-		var id = tab.getAttribute('data-tab');
-		$$('[data-tab]', sec).forEach(function (b) { b.setAttribute('aria-selected', b === tab); });
-		var panel = $('[data-panel]', sec);
-		var tpl = $('[data-panel-tpl="' + id + '"]', sec);
-		if (!panel.dataset.first) {
-			// сохраняем первую вкладку в шаблон, чтобы можно было вернуться
-			var keep = d.createElement('template');
-			keep.setAttribute('data-panel-tpl', panel.getAttribute('data-panel'));
-			keep.innerHTML = panel.innerHTML;
-			panel.parentNode.insertBefore(keep, panel);
-			panel.dataset.first = 1;
+	/* ---------- Сторис с фото работ ---------- */
+	var sd = d.getElementById('kv-stories');
+	if (sd) {
+		var sImg = $('[data-st-img]', sd), sBg = $('[data-st-bg]', sd), sBars = $('[data-st-bars]', sd);
+		var sList = [], sI = 0, sT = null, SD = 4500;
+		function sShow(i) {
+			if (i >= sList.length) { sd.close(); return; }
+			sI = Math.max(0, i);
+			sImg.src = sList[sI];
+			sBg.style.backgroundImage = 'url("' + sList[sI] + '")';
+			$$('i', sBars).forEach(function (b, k) {
+				b.className = k < sI ? 'is-done' : (k === sI ? 'is-run' : '');
+			});
+			clearTimeout(sT); sT = setTimeout(function () { sShow(sI + 1); }, SD);
+			if (sList[sI + 1]) { var pre = new Image(); pre.src = sList[sI + 1]; }
 		}
-		if (tpl) {
-			panel.innerHTML = tpl.innerHTML;
-			panel.setAttribute('data-panel', id);
-		}
-	});
+		d.addEventListener('click', function (e) {
+			var b = e.target.closest('[data-stories]');
+			if (!b) return;
+			sList = JSON.parse(b.getAttribute('data-stories'));
+			sImg.alt = 'Коврики для ' + b.getAttribute('data-brand');
+			$('[data-st-brand]', sd).textContent = b.getAttribute('data-brand');
+			sBars.innerHTML = sList.map(function () { return '<span><i></i></span>'; }).join('');
+			sBars.style.setProperty('--dur', SD + 'ms');
+			sd.showModal(); sShow(0);
+			goal('gallery_brand', { brand: b.getAttribute('data-brand') });
+		});
+		sd.addEventListener('click', function (e) {
+			var n = e.target.closest('[data-st]');
+			if (n) sShow(sI + +n.getAttribute('data-st'));
+		});
+		sd.addEventListener('keydown', function (e) {
+			if (e.key === 'ArrowRight') sShow(sI + 1);
+			if (e.key === 'ArrowLeft') sShow(sI - 1);
+		});
+		sd.addEventListener('close', function () { clearTimeout(sT); sImg.removeAttribute('src'); });
+		var tx = 0;
+		sd.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; clearTimeout(sT); }, { passive: true });
+		sd.addEventListener('touchend', function (e) {
+			var dx = e.changedTouches[0].clientX - tx;
+			if (Math.abs(dx) > 40) sShow(sI + (dx < 0 ? 1 : -1));
+			else if (!e.target.closest('button')) sShow(sI + (e.changedTouches[0].clientX > innerWidth / 2 ? 1 : -1));
+		});
+	}
 
 	/* ---------- Лайтбокс ---------- */
 	var lb = d.getElementById('kv-lightbox');
@@ -267,13 +289,6 @@
 		lb.appendChild(fr);
 		lb.showModal();
 		goal('video');
-	});
-
-	/* ---------- Слайдер сравнения ---------- */
-	$$('[data-compare]').forEach(function (c) {
-		var r = $('input', c);
-		var set = function () { c.style.setProperty('--pos', r.value + '%'); };
-		r.addEventListener('input', set); set();
 	});
 
 	/* ---------- Конструктор коврика ---------- */

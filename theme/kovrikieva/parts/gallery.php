@@ -1,4 +1,7 @@
 <?php
+/**
+ * Фото выполненных работ: плитки с логотипами марок, по клику — просмотр фото в формате «сторис».
+ */
 defined('ABSPATH') || exit;
 ['d' => $d] = $args;
 if (empty($d['gallery'])) {
@@ -9,35 +12,32 @@ $g   = $all[$d['gallery']] ?? [];
 if (!$g) {
 	return;
 }
-$first = array_key_first($g);
+$logos = [
+	'BMW' => 'cropped-bmw.webp', 'Maserati' => 'cropped-maserati-1.jpg', 'Mercedes-Benz' => 'cropped-mercedes-benz.jpg',
+	'Acura' => 'acura.jpg', 'Renault' => 'Renault.jpg', 'Toyota' => 'toyota.jpg', 'Ford' => 'ford.jpg',
+	'Chevrolet' => 'Chevrolet.jpg', 'Volkswagen' => 'Volkswagen-logo.jpg', 'Audi' => 'audi.jpg', 'Chrysler' => 'chrysler.jpg',
+	'Honda' => 'honda.jpg', 'Peugeot' => 'peugeot.jpg', 'BYD' => 'byd.jpg', 'Zeekr' => 'zeekr.jpg', 'Geely' => 'geely.jpg',
+	'Opel' => 'opel.jpg', 'Buick' => 'buick.jpg', 'Zotye' => 'zotye.jpg',
+];
 ?>
 <section class="kv-sec kv-gallery" id="gallery">
 	<div class="kv-wrap">
-		<h2 class="kv-h2">Фото выполненных работ</h2>
-		<p class="kv-muted kv-center">Выберите марку авто, чтобы посмотреть фото</p>
-		<div class="kv-tabs" role="tablist">
+		<h2 class="kv-h2 kv-h2--line">Фото выполненных работ</h2>
+		<p class="kv-gallery__sub">* Выберите марку авто, чтобы посмотреть фото</p>
+		<div class="kv-divider" aria-hidden="true"><?php echo kv_icon('target'); ?></div>
+		<ul class="kv-brands">
 			<?php foreach ($g as $brand => $imgs) : ?>
-				<button type="button" role="tab" class="kv-tab" aria-selected="<?php echo $brand === $first ? 'true' : 'false'; ?>" data-tab="<?php echo esc_attr(sanitize_title($brand)); ?>"><?php echo esc_html($brand); ?></button>
+				<li>
+					<button type="button" class="kv-brand" data-stories="<?php echo esc_attr(wp_json_encode(array_map('kv_upload', $imgs))); ?>" data-brand="<?php echo esc_attr($brand); ?>">
+						<span class="kv-brand__logo"><?php echo kv_img('2024/02/' . ($logos[$brand] ?? sanitize_title($brand) . '.jpg'), $brand); ?></span>
+						<span class="kv-brand__name"><?php echo esc_html($brand); ?></span>
+					</button>
+				</li>
 			<?php endforeach; ?>
-		</div>
-		<?php foreach ($g as $brand => $imgs) : $id = sanitize_title($brand); ?>
-			<?php if ($brand === $first) : ?>
-				<div class="kv-photos" data-panel="<?php echo esc_attr($id); ?>" data-gallery-group>
-					<?php foreach ($imgs as $i => $src) : ?>
-						<a href="<?php echo esc_url(kv_upload($src)); ?>" data-lightbox><?php echo kv_img($src, 'Коврики для ' . $brand . ' — фото ' . ($i + 1)); ?></a>
-					<?php endforeach; ?>
-				</div>
-			<?php else : ?>
-				<template data-panel-tpl="<?php echo esc_attr($id); ?>">
-					<?php foreach ($imgs as $i => $src) : ?>
-						<a href="<?php echo esc_url(kv_upload($src)); ?>" data-lightbox><?php echo kv_img($src, 'Коврики для ' . $brand . ' — фото ' . ($i + 1)); ?></a>
-					<?php endforeach; ?>
-				</template>
-			<?php endif; ?>
-		<?php endforeach; ?>
-		<div class="kv-center kv-gallery__more">
-			<?php if (kv_opt('instagram')) : ?><a class="kv-btn kv-btn--ghost" href="<?php echo esc_url(kv_opt('instagram')); ?>" target="_blank" rel="noopener"><?php echo kv_icon('instagram'); ?>Больше фото в Instagram</a><?php endif; ?>
-			<a class="kv-btn kv-btn--ghost" href="<?php echo esc_url(home_url('/fotogalereya/')); ?>">Все фото</a>
+		</ul>
+		<div class="kv-gallery__more">
+			<?php if (kv_opt('instagram')) : ?><a class="kv-btn" href="<?php echo esc_url(kv_opt('instagram')); ?>" target="_blank" rel="noopener">Больше фото в Instagram<?php echo kv_icon('instagram'); ?></a><?php endif; ?>
+			<a class="kv-btn" href="<?php echo esc_url(home_url('/fotogalereya/')); ?>">Все фото</a>
 		</div>
 	</div>
 </section>

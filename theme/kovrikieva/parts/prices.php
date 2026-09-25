@@ -7,20 +7,22 @@ if (!$p) {
 }
 $title = $p['title'] . ($city ? ' ' . kv_city_in($city) : '');
 ?>
-<section class="kv-sec kv-sec--alt kv-prices" id="prices">
+<section class="kv-sec kv-sota kv-prices" id="prices">
 	<div class="kv-wrap">
-		<h2 class="kv-h2"><?php echo esc_html($title); ?></h2>
+		<h2 class="kv-h2 kv-h2--line"><?php echo esc_html($title); ?></h2>
+		<div class="kv-divider" aria-hidden="true"><?php echo kv_icon('target'); ?></div>
 
 		<?php if ($p['type'] === 'cards') : ?>
-			<div class="kv-cards">
+			<p class="kvp-hint"><span>i</span>Нажмите или наведите на карточку комплекта, чтобы узнать стоимость и сделать заказ</p>
+			<div class="kvp-grid">
 				<?php foreach ($p['items'] as $it) : ?>
-					<article class="kv-card<?php echo !empty($it[3]) ? ' kv-card--gift' : ''; ?>">
+					<article class="kvp" tabindex="0">
 						<?php if (!empty($it[3])) : ?><span class="kv-ribbon"><?php echo kv_icon('gift'); ?>Логотип в подарок</span><?php endif; ?>
-						<div class="kv-card__img"><?php echo kv_img($it[2], $it[0]); ?></div>
-						<div class="kv-card__body">
-							<h3 class="kv-card__title"><?php echo esc_html($it[0]); ?></h3>
-							<p class="kv-card__price"><?php echo esc_html(kv_price($it[1])); ?></p>
-							<button type="button" class="kv-btn kv-btn--block" data-modal="order" data-product="<?php echo esc_attr($it[0]); ?>">Заказать</button>
+						<?php echo kv_img($it[2], $it[0]); ?>
+						<div class="kvp__ov">
+							<h3 class="kvp__title"><?php echo esc_html($it[0]); ?></h3>
+							<p class="kvp__price"><?php echo esc_html(kv_price($it[1])); ?></p>
+							<button type="button" class="kvp__btn" data-modal="order" data-product="<?php echo esc_attr($it[0]); ?>">Заказать</button>
 						</div>
 					</article>
 				<?php endforeach; ?>
