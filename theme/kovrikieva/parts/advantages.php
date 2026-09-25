@@ -35,12 +35,5 @@ $cols  = [array_slice($items, 0, $half, true), array_slice($items, $half, null, 
 				<?php endif; ?>
 			<?php endforeach; ?>
 		</div>
-		<?php if (!empty($d['textures'])) : ?>
-			<div class="kv-textures">
-				<?php foreach ($d['textures'] as $t) : ?>
-					<figure class="kv-texture"><?php echo kv_img($t[1], 'Структура коврика ЭВА: ' . $t[0]); ?><figcaption><?php echo esc_html($t[0]); ?></figcaption></figure>
-				<?php endforeach; ?>
-			</div>
-		<?php endif; ?>
 	</div>
 </section>

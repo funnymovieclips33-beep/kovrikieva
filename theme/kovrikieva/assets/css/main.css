@@ -653,3 +653,27 @@ ul,ol{margin:0 0 1em;padding-left:1.25em}
 }
 .kv-thumbs{grid-template-columns:repeat(4,1fr);gap:20px}
 @media (max-width:600px){.kv-thumbs{grid-template-columns:1fr 1fr;gap:12px}}
+
+/* ===== v8: преимущества — мобильный порядок, видео + сравнение структур ===== */
+@media (max-width:980px){
+	.kv-adv__grid{grid-template-columns:1fr;gap:28px}
+	.kv-adv__img{grid-column:auto;grid-row:auto;max-width:100%;width:100%}
+}
+.kv-tex__grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1040px}
+.kv-tex__video{position:relative;display:block;aspect-ratio:16/9;padding:0;border:0;overflow:hidden;background:#222;cursor:pointer;border-radius:10px}
+.kv-tex__video img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.kv-tex__video:hover img{transform:scale(1.04)}
+.kv-tex__play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:66px;height:44px;border-radius:6px;background:var(--c-brand);color:#fff;transition:transform .25s}
+.kv-tex__video:hover .kv-tex__play{transform:translate(-50%,-50%) scale(1.1)}
+.kv-tex__play .kv-i{width:26px;height:26px}
+.kv-compare{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:10px;background:#222;user-select:none}
+.kv-compare__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.kv-compare__top{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
+.kv-compare::after{content:"";position:absolute;top:0;bottom:0;left:var(--pos);width:2px;margin-left:-1px;background:#fff;pointer-events:none}
+.kv-compare__handle{position:absolute;top:50%;left:var(--pos);transform:translate(-50%,-50%);display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#fff;color:#414141;font-size:1.5rem;box-shadow:0 4px 14px rgba(0,0,0,.3);pointer-events:none;z-index:2}
+.kv-compare__label{position:absolute;top:24px;padding:6px 10px;background:#fff;color:#414141;font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;z-index:2;pointer-events:none}
+.kv-compare__label--l{left:24px}
+.kv-compare__label--r{right:24px}
+.kv-compare input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:3}
+.kv-lightbox .kv-lightbox__video--wide{height:auto;width:min(92vw,1100px);aspect-ratio:16/9;max-height:88vh}
+@media (max-width:800px){.kv-tex__grid{grid-template-columns:1fr;gap:20px}}

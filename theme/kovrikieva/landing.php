@@ -16,6 +16,7 @@ get_header();
 $sections = [
 	'hero',
 	'advantages',
+	'textures',
 	'prices',
 	'extra',
 	'cta-form',

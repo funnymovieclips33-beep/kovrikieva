@@ -20,7 +20,8 @@ function kv_defaults() {
 		'metrika'       => '79743688',
 		'gads'          => 'AW-720698988',
 		'ya_org'        => '213592712545',
-		'video'         => '545548584',
+		'video'         => '',
+		'video2'        => '545548584',
 		'geo_lat'       => '53.8672',
 		'geo_lng'       => '27.6531',
 	];
@@ -59,7 +60,8 @@ add_action('customize_register', function ($wp) {
 		'metrika'     => 'Яндекс.Метрика: номер счётчика',
 		'gads'        => 'Google Ads / GA4 ID (AW-… или G-…)',
 		'ya_org'      => 'ID организации в Яндекс.Картах (виджет отзывов)',
-		'video'       => 'Видео 9:16 на страницах ЭВА (ссылка Vimeo / YouTube Shorts / .mp4)',
+		'video'       => 'Видео 9:16 в первом экране ЭВА (ссылка Vimeo / YouTube / .mp4; пусто = видео из темы)',
+		'video2'      => 'Видео в блоке «Ромбы/Соты» (Vimeo ID или ссылка YouTube / .mp4)',
 		'geo_lat'     => 'Координаты: широта',
 		'geo_lng'     => 'Координаты: долгота',
 	];
@@ -75,3 +77,20 @@ add_action('customize_register', function ($wp) {
 		]);
 	}
 });
+
+/** Видео первого экрана: из настроек или встроенное в тему. */
+function kv_hero_video() {
+	$v = trim(kv_opt('video'));
+	return $v !== '' ? $v : KV_URI . '/assets/video/eva-kovriki.mp4';
+}
+
+/** Превью для видео: Vimeo → vumbnail, YouTube → img.youtube.com. */
+function kv_video_poster($v) {
+	if (preg_match('#(?:youtu\.be/|shorts/|[?&]v=|embed/)([\w-]{11})#', $v, $m)) {
+		return 'https://i.ytimg.com/vi/' . $m[1] . '/hqdefault.jpg';
+	}
+	if (preg_match('#^(?:https?://)?(?:player\.)?(?:vimeo\.com/(?:video/)?)?(\d+)$#', $v, $m)) {
+		return 'https://vumbnail.com/' . $m[1] . '.jpg';
+	}
+	return '';
+}

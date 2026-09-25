@@ -261,12 +261,19 @@
 			fr.allow = 'autoplay; fullscreen; picture-in-picture';
 			fr.allowFullscreen = true;
 		}
-		fr.className = 'kv-lightbox__video';
+		fr.className = 'kv-lightbox__video' + (v.getAttribute('data-ratio') === 'vertical' ? '' : ' kv-lightbox__video--wide');
 		lbImg.hidden = true;
 		$$('.kv-lightbox__nav', lb).forEach(function (b) { b.hidden = true; });
 		lb.appendChild(fr);
 		lb.showModal();
 		goal('video');
+	});
+
+	/* ---------- Слайдер сравнения ---------- */
+	$$('[data-compare]').forEach(function (c) {
+		var r = $('input', c);
+		var set = function () { c.style.setProperty('--pos', r.value + '%'); };
+		r.addEventListener('input', set); set();
 	});
 
 	/* ---------- Карта: загрузка по клику или при приближении ---------- */
